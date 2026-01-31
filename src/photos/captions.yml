@@ -38,22 +38,34 @@ japan/portrait2.jpg:
   title: Callejón de Tokio
   subtitle: Luces de neón en Shinjuku
 
-taiwan/landscape1.jpg:
-  title: Costa Amalfitana
-  subtitle: Positano al atardecer
+taiwan/taipei_101.jpg:
+  title: Taipei 101
+  subtitle: Taipei
+
+taiwan/cks_memorial.jpg:
+  title: National Concert Hall
+  subtitle: Taipei
 
 taiwan/koxinga.jpg:
   title: Koxinga Shrine
-  subtitle: historic landmark in Tainan
+  subtitle: Tainan
 
-taiwan/landscape2.jpg:
-  title: Toscana
-  subtitle: Colinas de Val d'Orcia
+taiwan/alishan_train.jpg:
+  title: Train in Alishan forest
+  subtitle: Alishan
 
-taiwan/portrait1.jpg:
-  title: Canal de Venecia
-  subtitle: Góndolas al amanecer
+taiwan/alishan_forest.jpg:
+  title: Among the trees
+  subtitle: Alishan
 
-taiwan/portrait2.jpg:
-  title: Callejón de Roma
-  subtitle: Trastevere de noche
+taiwan/kaohsiung_walk.jpg:
+  title: Zigzag temple path in Kaohsiung
+  subtitle: Kaohsiung
+
+taiwan/kaohsiung_walk.jpg:
+  title: Zigzag temple path in Kaohsiung
+  subtitle: Kaohsiung
+
+taiwan/kaohsiung_colours.jpg:
+  title: Colourful houses by the sea
+  subtitle: Kaohsiung
