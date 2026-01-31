@@ -38,18 +38,22 @@ japan/portrait2.jpg:
   title: Callejón de Tokio
   subtitle: Luces de neón en Shinjuku
 
-italy/landscape1.jpg:
+taiwan/landscape1.jpg:
   title: Costa Amalfitana
   subtitle: Positano al atardecer
 
-italy/landscape2.jpg:
+taiwan/koxinga.jpg:
+  title: Koxinga Shrine
+  subtitle: historic landmark in Tainan
+
+taiwan/landscape2.jpg:
   title: Toscana
   subtitle: Colinas de Val d'Orcia
 
-italy/portrait1.jpg:
+taiwan/portrait1.jpg:
   title: Canal de Venecia
   subtitle: Góndolas al amanecer
 
-italy/portrait2.jpg:
+taiwan/portrait2.jpg:
   title: Callejón de Roma
   subtitle: Trastevere de noche
