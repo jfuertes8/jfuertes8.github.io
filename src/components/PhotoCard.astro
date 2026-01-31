@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import type { Photo } from '../data/photos';
+
+interface Props {
+  photo: Photo;
+}
+
+const { photo } = Astro.props;
+---
+
+<div
+  class="photo-card group relative overflow-hidden rounded-lg bg-zinc-800 cursor-pointer break-inside-avoid"
+  data-country={photo.country}
+  data-orientation={photo.orientation}
+  data-title={photo.title}
+  data-subtitle={photo.subtitle}
+  data-maps-url={photo.mapsUrl ?? ''}
+>
+  <Image
+    src={photo.src}
+    alt={photo.title}
+    widths={[400, 800, 1200]}
+    sizes="(max-width: 639px) 100vw, (max-width: 767px) 50vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
+    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    loading="lazy"
+  />
+  <!-- Visible on touch (mobile/tablet), hover on desktop -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
+    <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+      <p class="text-white text-sm font-medium">{photo.title}</p>
+      {photo.subtitle && (
+        <p class="text-zinc-300 text-xs mt-0.5">{photo.subtitle}</p>
+      )}
+      {photo.mapsUrl && (
+        <a
+          href={photo.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 text-zinc-400 hover:text-white text-xs mt-1.5 transition-colors map-link"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          View on map
+        </a>
+      )}
+    </div>
+  </div>
+  <img
+    src={photo.src.src}
+    alt=""
+    class="hidden"
+    data-full-src={photo.src.src}
+  />
+</div>

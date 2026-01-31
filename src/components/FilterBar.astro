@@ -1,0 +1,50 @@
+---
+import { getCountries } from '../data/photos';
+const countries = await getCountries();
+---
+
+<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-3">
+  <!-- Country filter -->
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="text-xs uppercase tracking-wider text-zinc-500 font-medium mr-1">Country</span>
+    <button
+      data-filter-country="all"
+      class="filter-country-btn active-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-900 transition-colors"
+    >
+      All
+    </button>
+    {countries.map((country) => (
+      <button
+        data-filter-country={country}
+        class="filter-country-btn px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
+      >
+        <span class="capitalize">{country}</span>
+      </button>
+    ))}
+  </div>
+
+  <div class="w-full h-px bg-zinc-800 sm:w-px sm:h-6 sm:w-auto"></div>
+
+  <!-- Orientation filter -->
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="text-xs uppercase tracking-wider text-zinc-500 font-medium mr-1">Orientation</span>
+    <button
+      data-filter-orientation="all"
+      class="filter-orientation-btn active-filter px-3 py-1.5 rounded-full text-xs font-medium bg-white text-zinc-900 transition-colors"
+    >
+      All
+    </button>
+    <button
+      data-filter-orientation="horizontal"
+      class="filter-orientation-btn px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
+    >
+      Horizontal
+    </button>
+    <button
+      data-filter-orientation="vertical"
+      class="filter-orientation-btn px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200 transition-colors"
+    >
+      Vertical
+    </button>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+---
+import { getPhotos } from '../data/photos';
+import PhotoCard from './PhotoCard.astro';
+
+const photos = await getPhotos();
+---
+
+<div id="photo-grid" class="columns-1 sm:columns-2 md:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+  {photos.map((photo) => (
+    <PhotoCard photo={photo} />
+  ))}
+</div>
+
+<p id="no-results" class="hidden text-center text-zinc-500 py-16 text-lg">
+  No photos match the current filters.
+</p>

@@ -1,0 +1,55 @@
+# Leyendas de las fotos
+# Formato:
+#   carpeta/archivo.jpg:
+#     title: Título de la foto
+#     subtitle: Subtítulo o descripción corta
+#
+# Si no pones una foto aquí, se usará el nombre del archivo como título.
+
+spain/landscape1.jpg:
+  title: Atardecer en Barcelona
+  subtitle: Vista desde el Tibidabo
+
+spain/landscape2.jpg:
+  title: Campos de Castilla
+  subtitle: La Mancha en primavera
+
+spain/portrait1.jpg:
+  title: Callejón de Sevilla
+  subtitle: Barrio de Santa Cruz
+
+spain/portrait2.jpg:
+  title: Balcón andaluz
+  subtitle: Flores en Córdoba
+
+japan/landscape1.jpg:
+  title: Monte Fuji
+  subtitle: Amanecer desde el lago Kawaguchi
+
+japan/landscape2.jpg:
+  title: Bambú de Arashiyama
+  subtitle: Kioto en otoño
+
+japan/portrait1.jpg:
+  title: Torii de Fushimi Inari
+  subtitle: Mil puertas rojas
+
+japan/portrait2.jpg:
+  title: Callejón de Tokio
+  subtitle: Luces de neón en Shinjuku
+
+italy/landscape1.jpg:
+  title: Costa Amalfitana
+  subtitle: Positano al atardecer
+
+italy/landscape2.jpg:
+  title: Toscana
+  subtitle: Colinas de Val d'Orcia
+
+italy/portrait1.jpg:
+  title: Canal de Venecia
+  subtitle: Góndolas al amanecer
+
+italy/portrait2.jpg:
+  title: Callejón de Roma
+  subtitle: Trastevere de noche

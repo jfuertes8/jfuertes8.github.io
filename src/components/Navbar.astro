@@ -1,0 +1,126 @@
+---
+import { getCountries } from '../data/photos';
+
+const countries = await getCountries();
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="text-lg font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors">
+        Photos
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-1">
+        <a
+          href="/about"
+          class:list={[
+            'px-4 py-2 rounded-md text-sm font-medium transition-colors',
+            currentPath.startsWith('/about')
+              ? 'bg-zinc-800 text-white'
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+          ]}
+        >
+          About
+        </a>
+
+        <div class="relative group">
+          <a
+            href="/portfolio"
+            class:list={[
+              'px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1',
+              currentPath.startsWith('/portfolio')
+                ? 'bg-zinc-800 text-white'
+                : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+            ]}
+          >
+            Portfolio
+            <svg class="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+
+          <!-- Country submenu -->
+          <div class="absolute top-full left-0 mt-1 w-44 bg-zinc-900 border border-zinc-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+            <div class="py-1">
+              <a
+                href="/portfolio"
+                class="block px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors"
+              >
+                All countries
+              </a>
+              <div class="border-t border-zinc-800 my-1"></div>
+              {countries.map((country) => (
+                <a
+                  href={`/portfolio?country=${country}`}
+                  class="block px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800/50 capitalize transition-colors"
+                >
+                  {country}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800">
+    <div class="px-4 py-3 space-y-1">
+      <a
+        href="/about"
+        class:list={[
+          'block px-3 py-3 sm:py-2 rounded-md text-base sm:text-sm font-medium transition-colors',
+          currentPath.startsWith('/about')
+            ? 'bg-zinc-800 text-white'
+            : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+        ]}
+      >
+        About
+      </a>
+      <a
+        href="/portfolio"
+        class:list={[
+          'block px-3 py-3 sm:py-2 rounded-md text-base sm:text-sm font-medium transition-colors',
+          currentPath.startsWith('/portfolio')
+            ? 'bg-zinc-800 text-white'
+            : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50',
+        ]}
+      >
+        Portfolio
+      </a>
+      <div class="pl-4 space-y-1">
+        {countries.map((country) => (
+          <a
+            href={`/portfolio?country=${country}`}
+            class="block px-3 py-2.5 sm:py-1.5 rounded-md text-base sm:text-sm text-zinc-500 hover:text-white hover:bg-zinc-800/50 capitalize transition-colors"
+          >
+            {country}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

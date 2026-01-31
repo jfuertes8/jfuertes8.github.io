@@ -1,0 +1,249 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+---
+
+<Layout title="Portfolio — Photos">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">Portfolio</h1>
+
+    <div class="mb-6 sm:mb-8">
+      <FilterBar />
+    </div>
+
+    <PhotoGrid />
+  </section>
+
+  <!-- Lightbox -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-[100] bg-black/95 hidden items-center justify-center"
+  >
+    <button
+      id="lightbox-close"
+      class="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 p-2.5 sm:p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+      aria-label="Close lightbox"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <!-- Prev/Next: sides on desktop, bottom bar on mobile -->
+    <button
+      id="lightbox-prev"
+      class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-3 sm:p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+      aria-label="Previous photo"
+    >
+      <svg class="w-6 h-6 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button
+      id="lightbox-next"
+      class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-3 sm:p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+      aria-label="Next photo"
+    >
+      <svg class="w-6 h-6 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    <div class="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 text-center max-w-[80vw]">
+      <p id="lightbox-title" class="text-white text-sm sm:text-base font-medium"></p>
+      <p id="lightbox-subtitle" class="text-zinc-400 text-xs sm:text-sm mt-0.5"></p>
+      <a
+        id="lightbox-map-link"
+        href=""
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden inline-flex items-center gap-1 text-zinc-400 hover:text-white text-xs mt-1 transition-colors"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        View on map
+      </a>
+    </div>
+    <img
+      id="lightbox-img"
+      src=""
+      alt=""
+      class="max-h-[80vh] sm:max-h-[90vh] max-w-[90vw] object-contain"
+    />
+  </div>
+</Layout>
+
+<script>
+  // --- Filtering ---
+  const activeFilter = 'bg-white text-zinc-900';
+  const inactiveFilter = 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200';
+
+  let currentCountry = 'all';
+  let currentOrientation = 'all';
+
+  function applyFilters() {
+    const cards = document.querySelectorAll<HTMLElement>('.photo-card');
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const country = card.dataset.country;
+      const orientation = card.dataset.orientation;
+      const matchCountry = currentCountry === 'all' || country === currentCountry;
+      const matchOrientation = currentOrientation === 'all' || orientation === currentOrientation;
+
+      if (matchCountry && matchOrientation) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const noResults = document.getElementById('no-results');
+    if (noResults) {
+      noResults.classList.toggle('hidden', visible > 0);
+    }
+
+    // Update URL without navigation
+    const params = new URLSearchParams();
+    if (currentCountry !== 'all') params.set('country', currentCountry);
+    if (currentOrientation !== 'all') params.set('orientation', currentOrientation);
+    const qs = params.toString();
+    const url = window.location.pathname + (qs ? '?' + qs : '');
+    history.replaceState(null, '', url);
+  }
+
+  function setActiveBtn(group: string, value: string) {
+    const btns = document.querySelectorAll<HTMLElement>(`.filter-${group}-btn`);
+    btns.forEach((btn) => {
+      const btnValue = btn.dataset[`filter${group.charAt(0).toUpperCase() + group.slice(1)}`];
+      const classes = btn.classList;
+      if (btnValue === value) {
+        activeFilter.split(' ').forEach((c) => classes.add(c));
+        inactiveFilter.split(' ').forEach((c) => classes.remove(c));
+        classes.add('active-filter');
+      } else {
+        activeFilter.split(' ').forEach((c) => classes.remove(c));
+        inactiveFilter.split(' ').forEach((c) => classes.add(c));
+        classes.remove('active-filter');
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.filter-country-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentCountry = btn.dataset.filterCountry || 'all';
+      setActiveBtn('country', currentCountry);
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>('.filter-orientation-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentOrientation = btn.dataset.filterOrientation || 'all';
+      setActiveBtn('orientation', currentOrientation);
+      applyFilters();
+    });
+  });
+
+  // Read initial filters from URL
+  const params = new URLSearchParams(window.location.search);
+  const initCountry = params.get('country');
+  const initOrientation = params.get('orientation');
+  if (initCountry) {
+    currentCountry = initCountry;
+    setActiveBtn('country', initCountry);
+  }
+  if (initOrientation) {
+    currentOrientation = initOrientation;
+    setActiveBtn('orientation', initOrientation);
+  }
+  if (initCountry || initOrientation) {
+    applyFilters();
+  }
+
+  // --- Lightbox ---
+  const lightbox = document.getElementById('lightbox')!;
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title')!;
+  const lightboxSubtitle = document.getElementById('lightbox-subtitle')!;
+  const lightboxMapLink = document.getElementById('lightbox-map-link') as HTMLAnchorElement;
+  const lightboxClose = document.getElementById('lightbox-close')!;
+  const lightboxPrev = document.getElementById('lightbox-prev')!;
+  const lightboxNext = document.getElementById('lightbox-next')!;
+
+  function getVisibleCards(): HTMLElement[] {
+    return [...document.querySelectorAll<HTMLElement>('.photo-card')].filter(
+      (c) => c.style.display !== 'none'
+    );
+  }
+
+  let currentIndex = 0;
+
+  function openLightbox(index: number) {
+    const cards = getVisibleCards();
+    if (index < 0 || index >= cards.length) return;
+    currentIndex = index;
+    const card = cards[index];
+    const img = card.querySelector('img[data-full-src]') as HTMLImageElement;
+    lightboxImg.src = img.dataset.fullSrc || '';
+    lightboxImg.alt = card.dataset.title || '';
+    lightboxTitle.textContent = card.dataset.title || '';
+    lightboxSubtitle.textContent = card.dataset.subtitle || '';
+
+    const mapsUrl = card.dataset.mapsUrl;
+    if (mapsUrl) {
+      lightboxMapLink.href = mapsUrl;
+      lightboxMapLink.classList.remove('hidden');
+      lightboxMapLink.classList.add('inline-flex');
+    } else {
+      lightboxMapLink.classList.add('hidden');
+      lightboxMapLink.classList.remove('inline-flex');
+    }
+
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLElement>('.photo-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      // Don't open lightbox if clicking a link (map link)
+      if ((e.target as HTMLElement).closest('a')) return;
+      const cards = getVisibleCards();
+      const idx = cards.indexOf(card);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  lightboxPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cards = getVisibleCards();
+    openLightbox((currentIndex - 1 + cards.length) % cards.length);
+  });
+
+  lightboxNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cards = getVisibleCards();
+    openLightbox((currentIndex + 1) % cards.length);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxPrev.click();
+    if (e.key === 'ArrowRight') lightboxNext.click();
+  });
+</script>
