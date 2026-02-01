@@ -6,21 +6,29 @@
 #
 # Si no pones una foto aquí, se usará el nombre del archivo como título.
 
-spain/landscape1.jpg:
-  title: Atardecer en Barcelona
-  subtitle: Vista desde el Tibidabo
+spain/vias_tranvia.jpg:
+  title: Tram rails
+  subtitle: Zaragoza
 
-spain/landscape2.jpg:
-  title: Campos de Castilla
-  subtitle: La Mancha en primavera
+spain/pilarica.jpg:
+  title: Pilar's Basilica
+  subtitle: Zaragoza
 
-spain/portrait1.jpg:
-  title: Callejón de Sevilla
-  subtitle: Barrio de Santa Cruz
+spain/noria2.jpg:
+  title: Ferris wheel
+  subtitle: Zaragoza
 
-spain/portrait2.jpg:
-  title: Balcón andaluz
-  subtitle: Flores en Córdoba
+spain/vespa.jpg:
+  title: Vespa
+  subtitle: Zaragoza
+
+spain/pilar_tram.jpg:
+  title: The tram and the Basilica
+  subtitle: Zaragoza
+
+spain/pilar_fountain.jpg:
+  title: Tradition & modernity
+  subtitle: Zaragoza
 
 japan/landscape1.jpg:
   title: Monte Fuji
