@@ -34,21 +34,17 @@ spain/tranvia_murallas.jpg:
   title: Tram at a tram stop
   subtitle: Zaragoza
 
-japan/landscape1.jpg:
-  title: Monte Fuji
-  subtitle: Amanecer desde el lago Kawaguchi
+thailand/doi_inthanon.jpg:
+  title: Doi Inthanon
+  subtitle: Chiang Mai
 
-japan/landscape2.jpg:
-  title: Bambú de Arashiyama
-  subtitle: Kioto en otoño
+thailand/white_temple.jpg:
+  title: White Temple
+  subtitle: Chiang Rai
 
-japan/portrait1.jpg:
-  title: Torii de Fushimi Inari
-  subtitle: Mil puertas rojas
-
-japan/portrait2.jpg:
-  title: Callejón de Tokio
-  subtitle: Luces de neón en Shinjuku
+thailand/royal_palace.jpg:
+  title: Royal Palace
+  subtitle: Bangkok
 
 taiwan/taipei_101.jpg:
   title: Taipei 101
