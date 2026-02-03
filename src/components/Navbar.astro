@@ -5,7 +5,7 @@ const countries = await getCountries();
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="/" class="text-lg font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors">
@@ -123,4 +123,20 @@ const currentPath = Astro.url.pathname;
   btn?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
   });
+
+  // Scroll detection for navbar background
+  const nav = document.getElementById('main-nav');
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      nav?.classList.remove('bg-transparent');
+      nav?.classList.add('bg-zinc-900/95', 'backdrop-blur-sm');
+    } else {
+      nav?.classList.remove('bg-zinc-900/95', 'backdrop-blur-sm');
+      nav?.classList.add('bg-transparent');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Initial check in case page is already scrolled
+  handleScroll();
 </script>
