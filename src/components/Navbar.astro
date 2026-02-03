@@ -72,14 +72,15 @@ const currentPath = Astro.url.pathname;
         aria-label="Toggle menu"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="hamburger-icon" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-900/95 backdrop-blur-sm">
     <div class="px-4 py-3 space-y-1">
       <a
         href="/about"
@@ -120,14 +121,13 @@ const currentPath = Astro.url.pathname;
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-  });
-
-  // Scroll detection for navbar background
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
   const nav = document.getElementById('main-nav');
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
+  let menuOpen = false;
+
+  const updateNavBackground = () => {
+    if (menuOpen || window.scrollY > 0) {
       nav?.classList.remove('bg-transparent');
       nav?.classList.add('bg-zinc-900/95', 'backdrop-blur-sm');
     } else {
@@ -136,7 +136,18 @@ const currentPath = Astro.url.pathname;
     }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  btn?.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    menu?.classList.toggle('hidden');
+    hamburgerIcon?.classList.toggle('hidden');
+    hamburgerIcon?.classList.toggle('block');
+    closeIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('block');
+    updateNavBackground();
+  });
+
+  // Scroll detection for navbar background
+  window.addEventListener('scroll', updateNavBackground, { passive: true });
   // Initial check in case page is already scrolled
-  handleScroll();
+  updateNavBackground();
 </script>
