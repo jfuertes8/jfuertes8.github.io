@@ -6,6 +6,8 @@
 #
 # Si no pones una foto aquí, se usará el nombre del archivo como título.
 
+# SPAIN ----------------------------------------------------------------------------------------------
+
 spain/vias_tranvia.jpg:
   title: Tram rails
   subtitle: Zaragoza
@@ -38,6 +40,12 @@ spain/tranvia_murallas.jpg:
   title: Tram at a tram stop
   subtitle: Zaragoza
 
+spain/moon.jpg:
+  title: The moon
+  subtitle: Abelón de Sayago
+
+# THAILAND ----------------------------------------------------------------------------------------------
+
 thailand/doi_inthanon.jpg:
   title: Doi Inthanon
   subtitle: Chiang Mai
@@ -58,6 +66,12 @@ thailand/boat.jpg:
   title: Boat by the bay
   subtitle: Phuket
 
+thailand/monkey.jpg:
+  title: Monkey in the forest
+  subtitle: Krabi
+
+# TAIWAN ----------------------------------------------------------------------------------------------
+
 taiwan/taipei_101.jpg:
   title: Taipei 101
   subtitle: Taipei
@@ -66,24 +80,24 @@ taiwan/cks_memorial.jpg:
   title: National Concert Hall
   subtitle: Taipei
 
-taiwan/koxinga.jpg:
-  title: Koxinga Shrine
+taiwan/koxinga_shrine.jpg:
+  title: Man in front of the shrine
   subtitle: Tainan
 
-taiwan/alishan_train.jpg:
-  title: Train in Alishan forest
-  subtitle: Alishan
+taiwan/koxinga_door.jpg:
+  title: Koxinga Shrine entrance
+  subtitle: Tainan
 
-taiwan/alishan_forest.jpg:
-  title: Among the trees
-  subtitle: Alishan
+taiwan/tainan_park.jpg:
+  title: Asian nature
+  subtitle: Tainan
 
 taiwan/sister_ponds.jpg:
   title: Sister ponds
   subtitle: Alishan
 
 taiwan/kaohsiung_walk.jpg:
-  title: Zigzag temple path in Kaohsiung
+  title: Zigzag temple path
   subtitle: Kaohsiung
 
 taiwan/kaohsiung_colours.jpg:
