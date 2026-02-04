@@ -13,11 +13,15 @@ export interface Photo {
   title: string;
   subtitle: string;
   mapsUrl: string | null;
+  camera: string | null;
+  lens: string | null;
 }
 
 interface CaptionEntry {
   title?: string;
   subtitle?: string;
+  camera?: string;
+  lens?: string;
 }
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
@@ -101,11 +105,13 @@ export async function getPhotos(): Promise<Photo[]> {
       const caption = captions[key];
       const title = caption?.title ?? filenameToTitle(filename);
       const subtitle = caption?.subtitle ?? '';
+      const camera = caption?.camera ?? null;
+      const lens = caption?.lens ?? null;
 
       const diskPath = path.resolve('src/photos', key);
       const mapsUrl = await readGps(diskPath);
 
-      return { src: img, country, orientation, filename, key, title, subtitle, mapsUrl };
+      return { src: img, country, orientation, filename, key, title, subtitle, mapsUrl, camera, lens };
     }),
   );
 

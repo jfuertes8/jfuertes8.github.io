@@ -48,11 +48,52 @@ import PhotoGrid from '../../components/PhotoGrid.astro';
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
-    <div class="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 text-center max-w-[80vw]">
-      <p id="lightbox-title" class="text-white text-sm sm:text-base font-medium"></p>
-      <p id="lightbox-subtitle" class="text-zinc-400 text-xs sm:text-sm mt-0.5"></p>
+
+    <!-- Main content: Image + Sidebar -->
+    <div class="flex flex-col lg:flex-row items-center lg:items-stretch justify-center max-w-[95vw] max-h-[90vh] gap-0 lg:gap-4">
+      <!-- Image container -->
+      <div class="flex items-center justify-center">
+        <img
+          id="lightbox-img"
+          src=""
+          alt=""
+          class="max-h-[60vh] lg:max-h-[85vh] max-w-[90vw] lg:max-w-[75vw] object-contain rounded-md"
+        />
+      </div>
+
+      <!-- Sidebar with title and subtitle -->
+      <div class="hidden lg:flex flex-col justify-center w-52 xl:w-60 px-3 py-6">
+        <h2 id="lightbox-title" class="text-white text-base xl:text-lg font-semibold leading-tight"></h2>
+        <p id="lightbox-subtitle" class="text-zinc-300 text-sm xl:text-base mt-2 leading-relaxed"></p>
+        <div id="lightbox-camera-info" class="hidden mt-3 pt-3 border-t border-zinc-700/50">
+          <p id="lightbox-camera" class="text-zinc-400 text-xs"></p>
+          <p id="lightbox-lens" class="text-zinc-500 text-xs mt-0.5"></p>
+        </div>
+        <a
+          id="lightbox-map-link"
+          href=""
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden items-center gap-1.5 text-zinc-400 hover:text-white text-xs mt-4 transition-colors"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          View on map
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile: Title/subtitle at bottom -->
+    <div class="lg:hidden absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 text-center max-w-[80vw]">
+      <p id="lightbox-title-mobile" class="text-white text-sm sm:text-base font-medium"></p>
+      <p id="lightbox-subtitle-mobile" class="text-zinc-400 text-xs sm:text-sm mt-0.5"></p>
+      <div id="lightbox-camera-info-mobile" class="hidden mt-1.5">
+        <p id="lightbox-camera-mobile" class="text-zinc-500 text-xs"></p>
+      </div>
       <a
-        id="lightbox-map-link"
+        id="lightbox-map-link-mobile"
         href=""
         target="_blank"
         rel="noopener noreferrer"
@@ -65,12 +106,6 @@ import PhotoGrid from '../../components/PhotoGrid.astro';
         View on map
       </a>
     </div>
-    <img
-      id="lightbox-img"
-      src=""
-      alt=""
-      class="max-h-[80vh] sm:max-h-[90vh] max-w-[90vw] object-contain"
-    />
   </div>
 </Layout>
 
@@ -169,6 +204,14 @@ import PhotoGrid from '../../components/PhotoGrid.astro';
   const lightboxTitle = document.getElementById('lightbox-title')!;
   const lightboxSubtitle = document.getElementById('lightbox-subtitle')!;
   const lightboxMapLink = document.getElementById('lightbox-map-link') as HTMLAnchorElement;
+  const lightboxCameraInfo = document.getElementById('lightbox-camera-info')!;
+  const lightboxCamera = document.getElementById('lightbox-camera')!;
+  const lightboxLens = document.getElementById('lightbox-lens')!;
+  const lightboxTitleMobile = document.getElementById('lightbox-title-mobile')!;
+  const lightboxSubtitleMobile = document.getElementById('lightbox-subtitle-mobile')!;
+  const lightboxMapLinkMobile = document.getElementById('lightbox-map-link-mobile') as HTMLAnchorElement;
+  const lightboxCameraInfoMobile = document.getElementById('lightbox-camera-info-mobile')!;
+  const lightboxCameraMobile = document.getElementById('lightbox-camera-mobile')!;
   const lightboxClose = document.getElementById('lightbox-close')!;
   const lightboxPrev = document.getElementById('lightbox-prev')!;
   const lightboxNext = document.getElementById('lightbox-next')!;
@@ -189,17 +232,52 @@ import PhotoGrid from '../../components/PhotoGrid.astro';
     const img = card.querySelector('img[data-full-src]') as HTMLImageElement;
     lightboxImg.src = img.dataset.fullSrc || '';
     lightboxImg.alt = card.dataset.title || '';
+    
+    // Desktop sidebar
     lightboxTitle.textContent = card.dataset.title || '';
     lightboxSubtitle.textContent = card.dataset.subtitle || '';
+    
+    // Camera and lens info (desktop)
+    const camera = card.dataset.camera;
+    const lens = card.dataset.lens;
+    if (camera) {
+      lightboxCameraInfo.classList.remove('hidden');
+      lightboxCamera.textContent = camera;
+      if (lens) {
+        lightboxLens.classList.remove('hidden');
+        lightboxLens.textContent = lens;
+      } else {
+        lightboxLens.classList.add('hidden');
+      }
+    } else {
+      lightboxCameraInfo.classList.add('hidden');
+    }
+    
+    // Mobile bottom
+    lightboxTitleMobile.textContent = card.dataset.title || '';
+    lightboxSubtitleMobile.textContent = card.dataset.subtitle || '';
+
+    // Camera info (mobile)
+    if (camera) {
+      lightboxCameraInfoMobile.classList.remove('hidden');
+      lightboxCameraMobile.textContent = lens ? `${camera} • ${lens}` : camera;
+    } else {
+      lightboxCameraInfoMobile.classList.add('hidden');
+    }
 
     const mapsUrl = card.dataset.mapsUrl;
     if (mapsUrl) {
       lightboxMapLink.href = mapsUrl;
       lightboxMapLink.classList.remove('hidden');
       lightboxMapLink.classList.add('inline-flex');
+      lightboxMapLinkMobile.href = mapsUrl;
+      lightboxMapLinkMobile.classList.remove('hidden');
+      lightboxMapLinkMobile.classList.add('inline-flex');
     } else {
       lightboxMapLink.classList.add('hidden');
       lightboxMapLink.classList.remove('inline-flex');
+      lightboxMapLinkMobile.classList.add('hidden');
+      lightboxMapLinkMobile.classList.remove('inline-flex');
     }
 
     lightbox.classList.remove('hidden');

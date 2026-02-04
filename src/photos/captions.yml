@@ -3,6 +3,8 @@
 #   carpeta/archivo.jpg:
 #     title: Título de la foto
 #     subtitle: Subtítulo o descripción corta
+#     camera: Cámara utilizada
+#     lens: Objetivo utilizado
 #
 # Si no pones una foto aquí, se usará el nombre del archivo como título.
 
@@ -11,111 +13,161 @@
 spain/bridge_tram.jpg:
   title: Tram crossing the bridge
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/pilarica.jpg:
   title: Pilar's Basilica
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/noria2.jpg:
   title: Ferris wheel
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/vespa.jpg:
   title: Vespa
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/pilar_tram.jpg:
   title: The tram and the Basilica
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/seo_stone_bridge.jpg:
   title: Church by the river
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/pilar_fountain.jpg:
   title: Tradition & modernity
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/tranvia_murallas.jpg:
   title: Tram at a tram stop
   subtitle: Zaragoza
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
 spain/moon.jpg:
   title: The moon
   subtitle: Abelón de Sayago
+  camera: Canon EOS600D
+  lens: EF-S 55-250mm f/4-5.6 IS
 
 # THAILAND ----------------------------------------------------------------------------------------------
 
 thailand/doi_inthanon.jpg:
   title: Doi Inthanon
   subtitle: Chiang Mai
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 thailand/white_temple.jpg:
   title: White Temple
   subtitle: Chiang Rai
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 thailand/royal_palace.jpg:
   title: Royal Palace
   subtitle: Bangkok
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 thailand/ayutthaya_buddha.jpg:
   title: Buddha head among the roots
   subtitle: Ayutthaya
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 thailand/boat.jpg:
   title: Boat by the bay
   subtitle: Phuket
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 thailand/monkey.jpg:
   title: Monkey in the forest
   subtitle: Krabi
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 # TAIWAN ----------------------------------------------------------------------------------------------
 
 taiwan/taipei_101.jpg:
   title: Taipei 101
   subtitle: Taipei
-
-taiwan/cks_memorial.jpg:
-  title: National Concert Hall
-  subtitle: Taipei
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/koxinga_shrine.jpg:
   title: Man in front of the shrine
   subtitle: Tainan
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/koxinga_door.jpg:
   title: Koxinga Shrine entrance
   subtitle: Tainan
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/tainan_park.jpg:
   title: Asian nature
   subtitle: Tainan
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/sister_ponds.jpg:
   title: Sister ponds
   subtitle: Alishan
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/kaohsiung_walk.jpg:
   title: Zigzag temple path
   subtitle: Kaohsiung
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
 
 taiwan/kaohsiung_colours.jpg:
   title: Colourful houses by the sea
   subtitle: Kaohsiung
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
+
+# JAPAN ----------------------------------------------------------------------------------------------
 
 japan/daibutsu.jpg:
   title: Reclining Buddha
   subtitle: Fukuoka
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 japan/himeji.jpg:
   title: Himeji Castle
   subtitle: Himeji
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 japan/fuji.jpg:
   title: Mount Fuji
   subtitle: Fujiyoshida
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
 
 japan/koyasan.jpg:
   title: Japanese cemetery
   subtitle: Koyasan
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II

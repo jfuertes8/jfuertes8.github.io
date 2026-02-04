@@ -16,6 +16,8 @@ const { photo } = Astro.props;
   data-title={photo.title}
   data-subtitle={photo.subtitle}
   data-maps-url={photo.mapsUrl ?? ''}
+  data-camera={photo.camera ?? ''}
+  data-lens={photo.lens ?? ''}
 >
   <Image
     src={photo.src}
