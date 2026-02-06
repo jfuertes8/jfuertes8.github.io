@@ -34,12 +34,6 @@ spain/vespa.jpg:
   camera: Sony a6400
   lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
-spain/pilar_tram.jpg:
-  title: The tram and the Basilica
-  subtitle: Zaragoza
-  camera: Sony a6400
-  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
-
 spain/seo_stone_bridge.jpg:
   title: Church by the river
   subtitle: Zaragoza
@@ -52,8 +46,8 @@ spain/pilar_fountain.jpg:
   camera: Sony a6400
   lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
-spain/tranvia_murallas.jpg:
-  title: Tram at a tram stop
+spain/pilar_tram.jpg:
+  title: The tram and the basilica
   subtitle: Zaragoza
   camera: Sony a6400
   lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
@@ -102,6 +96,18 @@ thailand/monkey.jpg:
   camera: Canon EOS600D
   lens: EF-S 18-55mm f/3.5-5.6 IS II
 
+thailand/doi_suthep_buddhas.jpg:
+  title: Golden Buddhas
+  subtitle: Chiang Mai
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+thailand/yaksha.jpg:
+  title: Yaksha at the Royal Palace
+  subtitle: Bangkok
+  camera: Samsung Galaxy S23
+  lens: 
+
 # TAIWAN ----------------------------------------------------------------------------------------------
 
 taiwan/taipei_101.jpg:
@@ -143,6 +149,12 @@ taiwan/kaohsiung_walk.jpg:
 taiwan/kaohsiung_colours.jpg:
   title: Colourful houses by the sea
   subtitle: Kaohsiung
+  camera: Sony a6400
+  lens: FE 28-70mm F3.5-5.6 OSS
+
+taiwan/cks_memorial.jpg:
+  title: National Concert Hall
+  subtitle: Taipei
   camera: Sony a6400
   lens: FE 28-70mm F3.5-5.6 OSS
 
