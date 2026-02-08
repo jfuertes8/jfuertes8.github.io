@@ -1,16 +1,84 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+
+// Import all images from the photos folder
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>('../photos/**/*.{jpg,jpeg,png,webp}', {
+  eager: true
+});
+
+// Filter images by orientation
+const horizontalImages = [];
+const verticalImages = [];
+
+Object.entries(imageFiles).forEach(([path, module]) => {
+  const metadata = module.default;
+  const imageData = {
+    path: path.match(/\.\.\/photos\/(.*)/)?.[1] || path,
+    width: metadata.width,
+    height: metadata.height
+  };
+  
+  if (metadata.width > metadata.height) {
+    horizontalImages.push(imageData);
+  } else {
+    verticalImages.push(imageData);
+  }
+});
+
+// Select initial image (will be overridden by client-side)
+const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
 ---
 
 <Layout title="Javier Fuertes | Home">
   <Navbar slot="navbar" />
+  
+  <style>
+    @keyframes slowZoom {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.15);
+      }
+    }
+    
+    .hero-bg-zoom {
+      animation: slowZoom 5s linear forwards;
+    }
+    
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    
+    .bg-layer.active {
+      opacity: 1;
+    }
+  </style>
+  
   <section 
-    class="relative flex flex-col items-center justify-center min-h-screen px-4 text-center bg-cover bg-center bg-no-repeat"
-    style="background-image: url('/camera.jpg');"
+    id="hero-section"
+    class="relative flex flex-col items-center justify-center min-h-screen px-4 text-center overflow-hidden"
   >
+    <!-- Background layers for crossfade -->
+    <div 
+      id="bg-layer-1"
+      class="bg-layer hero-bg-zoom active"
+      style={`background-image: url('/src/photos/${initialImage.path}');`}
+    ></div>
+    <div 
+      id="bg-layer-2"
+      class="bg-layer hero-bg-zoom"
+      style={`background-image: url('/src/photos/${initialImage.path}');`}
+    ></div>
+    
     <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-black/60 z-[1]"></div>
     
     <!-- Content -->
     <div class="relative z-10 flex flex-col items-center">
@@ -35,3 +103,105 @@ import Navbar from '../components/Navbar.astro';
     </div>
   </section>
 </Layout>
+
+<script define:vars={{ horizontalImages, verticalImages }}>
+  const bgLayer1 = document.getElementById('bg-layer-1');
+  const bgLayer2 = document.getElementById('bg-layer-2');
+  
+  let currentLayer = 1;
+  let currentImageSet = horizontalImages;
+  
+  // Track current indices for each image set
+  let horizontalIndex = 0;
+  let verticalIndex = 0;
+  
+  // Check if mobile (typically < 768px)
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+  
+  // Get appropriate image set based on screen size
+  function getCurrentImageSet() {
+    return isMobile() ? verticalImages : horizontalImages;
+  }
+  
+  // Get current index based on screen size
+  function getCurrentIndex() {
+    return isMobile() ? verticalIndex : horizontalIndex;
+  }
+  
+  // Set current index based on screen size
+  function setCurrentIndex(value) {
+    if (isMobile()) {
+      verticalIndex = value;
+    } else {
+      horizontalIndex = value;
+    }
+  }
+  
+  // Function to get the next image sequentially
+  function getNextImage() {
+    const imageSet = getCurrentImageSet();
+    let currentIndex = getCurrentIndex();
+    
+    // Get the current image
+    const image = imageSet[currentIndex];
+    
+    // Increment index and wrap around if needed
+    currentIndex = (currentIndex + 1) % imageSet.length;
+    setCurrentIndex(currentIndex);
+    
+    return image;
+  }
+  
+  // Function to change the background with crossfade transition
+  function changeBackground() {
+    const nextImage = getNextImage();
+    const imageUrl = `url('/src/photos/${nextImage.path}')`;
+    
+    // Determine which layer to show next
+    const currentBgLayer = currentLayer === 1 ? bgLayer1 : bgLayer2;
+    const nextBgLayer = currentLayer === 1 ? bgLayer2 : bgLayer1;
+    
+    // Set the new image on the hidden layer
+    nextBgLayer.style.backgroundImage = imageUrl;
+    
+    // Reset zoom animation on the next layer
+    nextBgLayer.classList.remove('hero-bg-zoom');
+    void nextBgLayer.offsetWidth; // Force reflow
+    nextBgLayer.classList.add('hero-bg-zoom');
+    
+    // Crossfade: fade out current, fade in next
+    currentBgLayer.classList.remove('active');
+    nextBgLayer.classList.add('active');
+    
+    // Switch current layer
+    currentLayer = currentLayer === 1 ? 2 : 1;
+  }
+  
+  // Handle window resize - switch image sets if needed
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newImageSet = getCurrentImageSet();
+      if (newImageSet !== currentImageSet) {
+        currentImageSet = newImageSet;
+        changeBackground();
+      }
+    }, 250);
+  });
+  
+  // Set initial image based on device type
+  const initialImageSet = getCurrentImageSet();
+  currentImageSet = initialImageSet;
+  const startingImage = initialImageSet[0];
+  bgLayer1.style.backgroundImage = `url('/src/photos/${startingImage.path}')`;
+  bgLayer2.style.backgroundImage = `url('/src/photos/${startingImage.path}')`;
+  
+  // Initialize the index to 1 (since we start with the first image)
+  setCurrentIndex(1 % initialImageSet.length);
+  
+  // Change background every 5 seconds
+  setInterval(changeBackground, 5000);
+</script>
