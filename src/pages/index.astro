@@ -14,11 +14,11 @@ const verticalImages = [];
 Object.entries(imageFiles).forEach(([path, module]) => {
   const metadata = module.default;
   const imageData = {
-    path: path.match(/\.\.\/photos\/(.*)/)?.[1] || path,
+    src: metadata.src,
     width: metadata.width,
     height: metadata.height
   };
-  
+
   if (metadata.width > metadata.height) {
     horizontalImages.push(imageData);
   } else {
@@ -27,7 +27,7 @@ Object.entries(imageFiles).forEach(([path, module]) => {
 });
 
 // Select initial image (will be overridden by client-side)
-const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
+const initialImage = horizontalImages[0] || { src: '', width: 0, height: 0 };
 ---
 
 <Layout title="Javier Fuertes | Home">
@@ -66,15 +66,15 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
     class="relative flex flex-col items-center justify-center min-h-screen px-4 text-center overflow-hidden"
   >
     <!-- Background layers for crossfade -->
-    <div 
+    <div
       id="bg-layer-1"
       class="bg-layer hero-bg-zoom active"
-      style={`background-image: url('/src/photos/${initialImage.path}');`}
+      style={`background-image: url('${initialImage.src}');`}
     ></div>
-    <div 
+    <div
       id="bg-layer-2"
       class="bg-layer hero-bg-zoom"
-      style={`background-image: url('/src/photos/${initialImage.path}');`}
+      style={`background-image: url('${initialImage.src}');`}
     ></div>
     
     <!-- Dark overlay -->
@@ -160,24 +160,24 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
   // Function to change the background with crossfade transition
   function changeBackground() {
     const nextImage = getNextImage();
-    const imageUrl = `url('/src/photos/${nextImage.path}')`;
-    
+    const imageUrl = `url('${nextImage.src}')`;
+
     // Determine which layer to show next
     const currentBgLayer = currentLayer === 1 ? bgLayer1 : bgLayer2;
     const nextBgLayer = currentLayer === 1 ? bgLayer2 : bgLayer1;
-    
+
     // Set the new image on the hidden layer
     nextBgLayer.style.backgroundImage = imageUrl;
-    
+
     // Reset zoom animation on the next layer
     nextBgLayer.classList.remove('hero-bg-zoom');
     void nextBgLayer.offsetWidth; // Force reflow
     nextBgLayer.classList.add('hero-bg-zoom');
-    
+
     // Crossfade: fade out current, fade in next
     currentBgLayer.classList.remove('active');
     nextBgLayer.classList.add('active');
-    
+
     // Switch current layer
     currentLayer = currentLayer === 1 ? 2 : 1;
   }
@@ -199,8 +199,8 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
   const initialImageSet = getCurrentImageSet();
   currentImageSet = initialImageSet;
   const startingImage = initialImageSet[0];
-  bgLayer1.style.backgroundImage = `url('/src/photos/${startingImage.path}')`;
-  bgLayer2.style.backgroundImage = `url('/src/photos/${startingImage.path}')`;
+  bgLayer1.style.backgroundImage = `url('${startingImage.src}')`;
+  bgLayer2.style.backgroundImage = `url('${startingImage.src}')`;
   
   // Initialize the index to 1 (since we start with the first image)
   setCurrentIndex(1 % initialImageSet.length);
