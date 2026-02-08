@@ -44,7 +44,7 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
     }
     
     .hero-bg-zoom {
-      animation: slowZoom 5s linear forwards;
+      animation: slowZoom 10s linear forwards;
     }
     
     .bg-layer {
@@ -89,13 +89,16 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
       <div class="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
         <a
           href="/portfolio"
-          class="px-6 py-3 rounded-lg bg-white text-zinc-900 font-medium text-sm hover:bg-zinc-200 transition-colors text-center"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-200 transition-colors"
         >
           Explore Photos
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </a>
         <a
           href="/about"
-          class="px-6 py-3 rounded-lg bg-zinc-800 text-zinc-300 font-medium text-sm hover:bg-zinc-700 hover:text-white border border-zinc-700 transition-colors text-center"
+          class="px-6 py-3 rounded-lg bg-transparent text-zinc-300 font-bold text-sm hover:bg-zinc-800 hover:text-white border border-white transition-colors text-center"
         >
           About Me
         </a>
@@ -202,6 +205,6 @@ const initialImage = horizontalImages[0] || { path: '', width: 0, height: 0 };
   // Initialize the index to 1 (since we start with the first image)
   setCurrentIndex(1 % initialImageSet.length);
   
-  // Change background every 5 seconds
-  setInterval(changeBackground, 5000);
+  // Change background every 7 seconds
+  setInterval(changeBackground, 7000);
 </script>
