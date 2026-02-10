@@ -195,15 +195,18 @@ const initialImage = horizontalImages[0] || { src: '', width: 0, height: 0 };
     }, 250);
   });
   
-  // Set initial image based on device type
+  // Set initial image based on device type with random starting point
   const initialImageSet = getCurrentImageSet();
   currentImageSet = initialImageSet;
-  const startingImage = initialImageSet[0];
+  
+  // Generate random starting index
+  const randomStartIndex = Math.floor(Math.random() * initialImageSet.length);
+  const startingImage = initialImageSet[randomStartIndex];
   bgLayer1.style.backgroundImage = `url('${startingImage.src}')`;
   bgLayer2.style.backgroundImage = `url('${startingImage.src}')`;
   
-  // Initialize the index to 1 (since we start with the first image)
-  setCurrentIndex(1 % initialImageSet.length);
+  // Initialize the index to the next image after the random starting point
+  setCurrentIndex((randomStartIndex + 1) % initialImageSet.length);
   
   // Change background every 7 seconds
   setInterval(changeBackground, 7000);
