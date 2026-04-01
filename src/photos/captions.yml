@@ -28,9 +28,21 @@ spain/noria2.jpg:
   camera: Sony a6400
   lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
-spain/vespa.jpg:
-  title: Vespa
-  subtitle: Zaragoza
+spain/palomas.jpg:
+  title: Contemplating pidgeons
+  subtitle: Pamplona
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
+
+spain/town_hall.jpg:
+  title: Pamplona's town hall
+  subtitle: Pamplona
+  camera: Sony a6400
+  lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
+
+spain/cathedral.jpg:
+  title: Pamplona's cathedral
+  subtitle: Pamplona
   camera: Sony a6400
   lens: Sony E PZ 16-50mm f/3.5-5.6 OSS
 
