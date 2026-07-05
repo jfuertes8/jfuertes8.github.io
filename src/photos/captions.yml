@@ -261,3 +261,21 @@ japan/royal_palace.jpg:
   subtitle: Tokyo
   camera: Canon EOS600D
   lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/koyasan_2.jpg:
+  title: Japanese cemetery
+  subtitle: Koyasan
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/shirakawago_house.jpg:
+  title: Traditional house in Shirakawa-go
+  subtitle: Shirakawa-go
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/torii_nikko.jpg:
+  title: Ancient Torii gate
+  subtitle: Nikko
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
