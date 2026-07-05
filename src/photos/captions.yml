@@ -243,3 +243,21 @@ japan/koyasan.jpg:
   subtitle: Koyasan
   camera: Canon EOS600D
   lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/fukuoka.jpg:
+  title: Fukuoka skyline
+  subtitle: Fukuoka
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/shirakawa_go.jpg:
+  title: Shirakawa selfie
+  subtitle: Shirakawa-go
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
+
+japan/royal_palace.jpg:
+  title: Royal palace mounted guard
+  subtitle: Tokyo
+  camera: Canon EOS600D
+  lens: EF-S 18-55mm f/3.5-5.6 IS II
